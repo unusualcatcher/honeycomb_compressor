@@ -31,7 +31,6 @@ def create_hex_pattern(radius: int) -> np.ndarray:
     ], np.int32)
     cv2.fillPoly(mask, [points], 1.0)
     
-    # Slightly refined edge smoothing
     mask = cv2.GaussianBlur(mask, (3, 3), 0.8)
     return mask
 
@@ -40,9 +39,8 @@ def apply_hexagonal_grid(image: np.ndarray, hex_radius: int) -> np.ndarray:
     hex_mask = create_hex_pattern(hex_radius)
     hex_height, hex_width = hex_mask.shape
     rows, cols, _ = image.shape
-    hex_image = image.copy()  # Start with a copy of the original image
+    hex_image = image.copy() 
     
-    # Slightly reduced strides for better overlap
     stride_y = hex_height // 3
     stride_x = hex_radius // 2
     
@@ -50,19 +48,18 @@ def apply_hexagonal_grid(image: np.ndarray, hex_radius: int) -> np.ndarray:
         for x in range(0, cols - hex_width + 1, stride_x):
             region = image[y:y + hex_height, x:x + hex_width].astype(np.float32)
             
-            # Apply weighted averaging
+
             masked_region = region * hex_mask[:, :, np.newaxis]
             mask_sum = np.sum(hex_mask)
             
             if mask_sum > 0:
                 region_avg = np.sum(masked_region, axis=(0, 1)) / mask_sum
                 
-                # Enhanced blending
                 blend_mask = hex_mask[:, :, np.newaxis]
-                blended_region = (region * (1 - blend_mask * 0.8) +  # Reduced blend intensity
-                                region_avg * blend_mask * 0.8)  # Preserve more original detail
+                blended_region = (region * (1 - blend_mask * 0.8) +  
+                                region_avg * blend_mask * 0.8) 
                 
-                # Update the image with the blended result
+          
                 current = hex_image[y:y + hex_height, x:x + hex_width]
                 hex_image[y:y + hex_height, x:x + hex_width] = (
                     current * (1 - blend_mask * 0.7) + blended_region * blend_mask * 0.7
@@ -76,7 +73,6 @@ def compress_image(image: Image, quality: int = 50, hex_radius: int = 4) -> byte
     hex_image = apply_hexagonal_grid(np_image, hex_radius)
     hex_image_pil = Image.fromarray(hex_image.astype('uint8'))
     
-    # Slightly adjusted quality
     adjusted_quality = min(quality + 15, 90)  # More conservative quality boost
     
     buffer = io.BytesIO()
