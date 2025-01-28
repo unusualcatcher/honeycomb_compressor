@@ -1,0 +1,184 @@
+{% load static %}
+<html>
+    <head>
+        <!-- Load the "Press Start 2P" font from Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+        
+        <!-- Add Bootstrap for responsiveness -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                height: 100vh;
+                background-image: url('{% static "main.png" %}');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                color: white;
+                font-family: 'Press Start 2P', cursive; /* Apply the same font throughout the page */
+            }
+
+            .heading-container {
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 5rem;
+                text-align: center;
+                color: #F2C94C;
+                text-shadow:
+                    3px 3px 5px rgba(0, 0, 0, 0.6),
+                    -3px -3px 5px rgba(0, 0, 0, 0.4),
+                    0px 0px 25px rgba(255, 255, 255, 0.3);
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+            }
+
+            .form-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            /* Box styling for the form */
+            .form-box {
+                background-color: rgba(255, 205, 50, 0.4); /* Darker yellow background for better readability */
+                border: 2px solid #F2C94C; /* Bee-like yellow border */
+                padding: 40px;
+                border-radius: 10px;
+                box-shadow: 0 6px 10px rgba(0, 0, 0, 0.6), 0 1px 8px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+                width: 90%;
+                max-width: 700px; /* Make it wider */
+                height: auto; /* Make it longer */
+            }
+
+            .form-title {
+                font-size: 1.8rem;
+                color: black;
+                margin-bottom: 20px;
+                letter-spacing: 1px;
+            }
+
+            .input-label {
+                font-size: 1.2rem;
+                color: #F2C94C;
+                margin-bottom: 10px;
+            }
+
+            .file-input {
+                margin-bottom: 20px;
+                padding: 12px;
+                /* background-color: rgba(255, 255, 255, 0.3);
+                border: 2px solid #F2C94C; */
+                border-radius: 5px;
+                color: black;
+                font-family: 'Press Start 2P', cursive;
+                font-size: 1.2rem;
+            }
+
+            /* "Choose File" button design */
+            .file-input::-webkit-file-upload-button {
+                background-color: #F2C94C;
+                color: black;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1rem;
+                font-family: 'Press Start 2P', cursive;
+                text-transform: uppercase;
+            }
+
+            .file-input::-webkit-file-upload-button:hover {
+                background-color: #F2B94C; /* Slightly darker yellow on hover */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            }
+
+            .submit-button {
+                padding: 12px 20px;
+                font-size: 1.2rem;
+                background-color: #F2C94C;
+                color: black;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                text-transform: uppercase;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+                transition: all 0.3s ease-in-out;
+            }
+
+            .submit-button:hover {
+                background-color: #F2B94C; /* Slightly darker yellow on hover */
+                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.6);
+            }
+
+            /* Remove border from file input */
+            .file-input::-webkit-file-upload-button {
+                border: none;
+            }
+
+            /* Change the text color of "No file chosen" */
+            .file-input::file-selector-button {
+                color: black;
+            }
+
+            /* Responsive adjustments using Bootstrap */
+            @media (max-width: 600px) {
+                h1 {
+                    font-size: 3rem;
+                }
+
+                .form-box {
+                    width: 90%;
+                    padding: 30px;
+                }
+
+                .file-input, .submit-button {
+                    font-size: 1rem;
+                }
+            }
+
+        </style>
+    </head>
+    <body>
+        <!-- Heading Container -->
+        <div class="heading-container">
+            <h1>HONEYCOMB COMPRESSOR</h1>
+        </div>
+
+        <!-- Form Container with the form-box -->
+        <div class="form-container">
+            <div class="form-box">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p class="form-title">Upload Your Image</p>
+        
+                    <input type="file" name="image" id="image" accept="image/*" class="file-input">
+        
+                    <button type="submit" class="submit-button">
+                        Compress And Download
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Add Bootstrap JS for responsiveness (Optional) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
