@@ -1,7 +1,7 @@
 # Honeycomb Image Compressor 
 
 ## Overview  
-The Honeycomb Image Compressor is an image compression tool inspired by nature's most efficient structure: the hexagon. Unlike traditional image compression methods that rely on square or rectangular grids, this technique applies a hexagonal tiling system to reduce file sizes while maintaining visual quality. This repository contains a Django-based implementation of the compressor.  
+The Honeycomb Image Compressor is an image compression tool inspired by nature's most efficient structure: the hexagon. Unlike traditional image compression methods that rely on square or rectangular grids, this technique applies a hexagonal grid system to reduce file sizes while maintaining visual quality. This repository contains a Django-based implementation of the compressor.  
 
 ## Features  
 - Hexagonal grid-based compression for smoother image quality  
