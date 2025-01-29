@@ -45,7 +45,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-### Usage
+## Usage
 - Open your browser and go to http://127.0.0.1:8000/
 - Upload an image through the web interface
 - The system applies the hexagonal compression algorithm
