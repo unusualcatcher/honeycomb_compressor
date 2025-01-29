@@ -20,7 +20,7 @@ The Honeycomb Image Compressor is an image compression tool inspired by nature's
 ### 2. Navigate to the Project Directory  
 Open a terminal or command prompt and move into the extracted folder:  
 ```
-cd path/to/honeycomb-image-compressor
+cd path/to/honeycomb_compressor-main
 ```
 ### 3. Create a Virtual Environment
 ```
